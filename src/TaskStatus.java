@@ -1,3 +1,5 @@
-public enum taskStatus {
-    NEW
+public enum TaskStatus {
+    NEW,
+    IN_PROGRESS,
+    DONE
 }
