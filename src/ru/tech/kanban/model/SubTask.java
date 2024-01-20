@@ -1,4 +1,8 @@
-import java.util.ArrayList;
+package ru.tech.kanban.model;
+
+import ru.tech.kanban.service.TaskManager;
+import ru.tech.kanban.service.TaskStatus;
+import ru.tech.kanban.Main;
 
 public class SubTask extends Task {
     private int epicID;
@@ -23,7 +27,7 @@ public class SubTask extends Task {
 
     @Override
     public String toString() {
-        return "SubTask{" +
+        return "ru.tech.kanban.model.SubTask{" +
                 "epicID=" + epicID +
                 ", name='" + getName() + '\'' +
                 ", description='" + getDescription() + '\'' +

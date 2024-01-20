@@ -1,8 +1,14 @@
+package ru.tech.kanban.service;
+
+import ru.tech.kanban.model.Epic;
+import ru.tech.kanban.model.SubTask;
+import ru.tech.kanban.model.Task;
+import ru.tech.kanban.Main;
 import java.util.ArrayList;
 import java.util.HashMap;
 
 public class TaskManager {
-    protected static int id = 0;
+    protected static int id = 1000;
     public HashMap<Integer, Task> tasksMap = new HashMap<>();
     public HashMap<Integer, SubTask> subTasksMap = new HashMap<>();
     public HashMap<Integer, Epic> epicsMap = new HashMap<>();
@@ -52,19 +58,31 @@ public class TaskManager {
         }
     }
 
-    public HashMap<Integer, Task> getListTasks() {
+    public ArrayList<Task> getListTasks() {
         //метод для получения всех задач
-        return tasksMap;
+        ArrayList<Task> tasksList = new ArrayList<>();
+        for (Task task: tasksMap.values()) {
+            tasksList.add(task);
+        }
+        return tasksList;
     }
 
-    public HashMap<Integer, SubTask> getListSubTasks() {
+    public ArrayList<SubTask> getListSubTasks() {
         //метод для получения всех подзадач
-        return subTasksMap;
+        ArrayList<SubTask> subTasksList = new ArrayList<>();
+        for (SubTask subTask: subTasksMap.values()) {
+            subTasksList.add(subTask);
+        }
+        return subTasksList;
     }
 
-    public HashMap<Integer, Epic> getListEpics() {
+    public ArrayList<Epic> getListEpics() {
         //метод для получения всех зэпиков
-        return epicsMap;
+        ArrayList<Epic> epicsList = new ArrayList<>();
+        for (Epic epic: epicsMap.values()) {
+            epicsList.add(epic);
+        }
+        return epicsList;
     }
 
 
@@ -97,43 +115,55 @@ public class TaskManager {
 
     public void clearAllSubTasks() {
         //метод для удаления всех подзадач
+        for (SubTask subTask: subTasksMap.values()) {
+            epicsMap.get(subTask.getEpicID()).getIdSubTask().clear();
+        }
         subTasksMap.clear();
     }
 
     public void clearAllEpics() {
         //метод для удаления всех эпиков
+        for(Epic epic: epicsMap.values()) {
+           for(Integer subTaskId: epic.getIdSubTask()) {
+               subTasksMap.remove(subTaskId);
+                }
+            }
         epicsMap.clear();
     }
 
-    public Task getTasks(int id) {
+    public Task getTask(Integer id) {
         //метод для получения задачи по id
         return tasksMap.get(id);
     }
-    public SubTask getSubTasks(int id) {
+    public SubTask getSubTask(Integer id) {
         //метод для получения подзадачи по id
         return subTasksMap.get(id);
     }
 
-    public Epic getEpic(int id) {
+    public Epic getEpic(Integer id) {
         //метод для получения эпика по id
         return epicsMap.get(id);
     }
 
-    public void removeTask(int id) {
+    public void removeTask(Integer id) {
         //метод для удаления задачи по id
         tasksMap.remove(id);
     }
 
-    public void removeSubTask(int id) {
+    public void removeSubTask(Integer id) {
         //метод для удаления подзадачи по id
+        epicsMap.get(subTasksMap.get(id).getEpicID()).getIdSubTask().remove(id);
         subTasksMap.remove(id);
     }
-    public void removeEpic(int id) {
+    public void removeEpic(Integer id) {
         //метод для удаления эпика по id
+        for (Integer subTaskId: epicsMap.get(id).getIdSubTask()) {
+            subTasksMap.remove(subTasksMap);
+        }
         epicsMap.remove(id);
     }
 
-    public ArrayList<Integer> SubTasksEpic(int id) {
+    public ArrayList<Integer> SubTasksEpic(Integer id) {
         //метод для получение всех подзадач определенного эпика
         return epicsMap.get(id).getIdSubTask();
     }
@@ -141,7 +171,7 @@ public class TaskManager {
 
     @Override
     public String toString() {
-        return "TaskManager{" +
+        return "ru.tech.kanban.service.TaskManager{" +
                 "taskMap=" + tasksMap +
                 ", subTaskMap=" + subTasksMap +
                 ", epicMap=" + epicsMap +

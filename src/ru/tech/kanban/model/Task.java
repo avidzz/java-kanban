@@ -1,11 +1,15 @@
+package ru.tech.kanban.model;
+
 import java.util.Objects;
+import ru.tech.kanban.service.TaskManager;
+import ru.tech.kanban.service.TaskStatus;
+import ru.tech.kanban.Main;
 
 public class Task {
     private String name;
     private String description;
     private TaskStatus status;
     private int id;
-
 
     public Task(String name, String description, TaskStatus status, int id) {
         this.name = name;
@@ -55,7 +59,7 @@ public class Task {
 
     @Override
     public String toString() {
-        return "Task{" +
+        return "ru.tech.kanban.model.Task{" +
                 "name='" + name + '\'' +
                 ", description='" + description + '\'' +
                 ", status=" + status +

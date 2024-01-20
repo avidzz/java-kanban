@@ -1,4 +1,9 @@
+package ru.tech.kanban.model;
+
 import java.util.ArrayList;
+import ru.tech.kanban.service.TaskManager;
+import ru.tech.kanban.service.TaskStatus;
+import ru.tech.kanban.Main;
 
 public class Epic extends Task {
     private ArrayList<Integer> idSubTask = new ArrayList<>();
@@ -21,7 +26,7 @@ public class Epic extends Task {
 
     @Override
     public String toString() {
-        return "Epic{" +
+        return "ru.tech.kanban.model.Epic{" +
                 "idSubTask=" + idSubTask +
                 ", name='" + getName() + '\'' +
                 ", description='" + getDescription() + '\'' +

@@ -1,3 +1,12 @@
+package ru.tech.kanban;
+
+import ru.tech.kanban.model.Epic;
+import ru.tech.kanban.model.SubTask;
+import ru.tech.kanban.model.Task;
+import ru.tech.kanban.service.TaskManager;
+import ru.tech.kanban.service.TaskStatus;
+
+
 public class Main {
 
     public static void main(String[] args) {
@@ -16,8 +25,8 @@ public class Main {
         //сохраняем эпик1 в список
         taskManager.addEpic(epicIN1);
         //создаем две подзадачи к эпику 1
-        SubTask subTaskIN1 = new SubTask("Подзадача1", "Спроектировать дом", TaskStatus.DONE, 3);
-        SubTask subTaskIN2 = new SubTask("Подзадача2", "Найти бригаду строителей", TaskStatus.NEW, 3);
+        SubTask subTaskIN1 = new SubTask("Подзадача1", "Спроектировать дом", TaskStatus.DONE, 1003);
+        SubTask subTaskIN2 = new SubTask("Подзадача2", "Найти бригаду строителей", TaskStatus.NEW, 1003);
         //сохраняем подзадачи в список
         taskManager.addSubTask(subTaskIN1);
         taskManager.addSubTask(subTaskIN2);
@@ -27,7 +36,7 @@ public class Main {
         //добавляем эпик2 в список
         taskManager.addEpic(epicIN2);
         //создаем одну подзадачу к эпику2
-        SubTask subTaskIN3 = new SubTask("Подзадача1", "Купить путевку", TaskStatus.NEW, 6);
+        SubTask subTaskIN3 = new SubTask("Подзадача1", "Купить путевку", TaskStatus.NEW, 1006);
         //сохраняем подзадачу в список
         taskManager.addSubTask(subTaskIN3);
 
@@ -37,7 +46,7 @@ public class Main {
         System.out.println(taskManager.getListEpics());
 
         //удаляем одну из подзадач эпика1
-        taskManager.removeSubTask(5);
+        taskManager.removeSubTask(1005);
         //проверка
         System.out.println(taskManager.getListSubTasks());
 
